@@ -1,0 +1,222 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-nav);
+  transition: background-color var(--transition-smooth), border-color var(--transition-smooth), backdrop-filter var(--transition-smooth);
+  padding: 1.25rem 0;
+}
+
+.scrolled {
+  background-color: rgba(5, 7, 13, 0.78);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0.85rem 0;
+}
+
+.navContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: var(--container-wide);
+  margin: 0 auto;
+  padding: 0 var(--space-xl);
+
+  @include mobile {
+    padding: 0 var(--space-md);
+  }
+}
+
+.brandGroup {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+// Plain, high-end editorial typography - STRICTLY NO LOGO OR ICON!
+.brandName {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  display: inline-block;
+  transition: color var(--transition-fast);
+
+  &:hover {
+    color: var(--ice-blue);
+  }
+
+  @include mobile {
+    font-size: 1rem;
+    letter-spacing: 0.06em;
+  }
+}
+
+.hackathonBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-full);
+  background: rgba(36, 87, 255, 0.12);
+  border: 1px solid var(--border-accent);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+  color: var(--ice-blue);
+
+  @include mobile {
+    display: none;
+  }
+}
+
+.badgePulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--primary-cobalt);
+  box-shadow: 0 0 6px var(--primary-cobalt);
+}
+
+.desktopNav {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+
+  @include mobile {
+    display: none;
+  }
+
+  @media (max-width: 1100px) {
+    gap: 0.85rem;
+  }
+}
+
+.navLink {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--text-secondary);
+  transition: all var(--transition-fast);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.65rem;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--ice-blue);
+    background: rgba(143, 217, 255, 0.06);
+  }
+
+  &:focus-visible {
+    outline: none;
+    color: var(--ice-blue);
+    box-shadow: 0 0 0 2px var(--border-focus);
+  }
+
+  &.active {
+    color: var(--ice-blue);
+    background: rgba(36, 87, 255, 0.12);
+  }
+}
+
+.actionGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.aiTriggerBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.95rem;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, rgba(36, 87, 255, 0.15), rgba(143, 124, 255, 0.15));
+  border: 1px solid rgba(143, 124, 255, 0.35);
+  font-family: var(--font-mono);
+  font-size: 0.78125rem;
+  color: var(--text-primary);
+  transition: all var(--transition-fast);
+
+  &:hover {
+    background: linear-gradient(135deg, rgba(36, 87, 255, 0.28), rgba(143, 124, 255, 0.28));
+    border-color: var(--ice-blue);
+    transform: translateY(-1px);
+    box-shadow: 0 0 16px rgba(143, 124, 255, 0.25);
+  }
+
+  @include mobile {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.72rem;
+  }
+}
+
+.mobileMenuBtn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+
+  @include mobile {
+    display: inline-flex;
+  }
+}
+
+// Mobile Dropdown Drawer
+.mobileDrawer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.5rem var(--space-md);
+  background: rgba(5, 7, 13, 0.96);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
+
+.mobileNavLink {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 0.5rem;
+  border-bottom: 1px solid rgba(155, 166, 187, 0.08);
+  border-radius: var(--radius-xs);
+  transition: all var(--transition-fast);
+  text-decoration: none;
+
+  &:hover,
+  &.active {
+    color: var(--ice-blue);
+    background: rgba(143, 217, 255, 0.06);
+    padding-left: 0.85rem;
+  }
+
+  &:focus-visible {
+    outline: none;
+    color: var(--ice-blue);
+  }
+}

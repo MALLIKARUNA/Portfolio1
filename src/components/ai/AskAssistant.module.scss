@@ -1,0 +1,199 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.assistantOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  background: rgba(5, 7, 13, 0.7);
+  backdrop-filter: blur(8px);
+}
+
+.assistantDrawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 480px;
+  background: #090E1A;
+  border-left: 1px solid var(--border-accent);
+  box-shadow: -15px 0 45px rgba(0, 0, 0, 0.8), 0 0 30px var(--cobalt-glow);
+  display: flex;
+  flex-direction: column;
+  z-index: calc(var(--z-modal) + 1);
+
+  @include mobile {
+    max-width: 100%;
+  }
+}
+
+.drawerHeader {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(12, 18, 32, 0.85);
+  backdrop-filter: blur(12px);
+}
+
+.headerTitleGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.assistantName {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.groundedBadge {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-full);
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: #34D399;
+}
+
+.closeButton {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+
+  &:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.12);
+  }
+}
+
+.messagesContainer {
+  flex-grow: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.messageBubble {
+  max-width: 88%;
+  padding: 0.85rem 1.15rem;
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  line-height: 1.6;
+
+  &.userMessage {
+    align-self: flex-end;
+    background: var(--primary-cobalt);
+    color: #FFFFFF;
+    border-bottom-right-radius: 2px;
+  }
+
+  &.assistantMessage {
+    align-self: flex-start;
+    background: rgba(17, 24, 39, 0.85);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-primary);
+    border-bottom-left-radius: 2px;
+  }
+}
+
+.suggestedSection {
+  margin-top: var(--space-sm);
+}
+
+.suggestedHeading {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--muted-text);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+
+.promptPills {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.promptPill {
+  text-align: left;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  padding: 0.5rem 0.85rem;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  transition: all var(--transition-fast);
+
+  &:hover {
+    color: var(--ice-blue);
+    background: rgba(36, 87, 255, 0.08);
+    border-color: var(--border-accent);
+  }
+}
+
+.drawerInputArea {
+  padding: 1rem 1.25rem;
+  border-top: 1px solid var(--border-subtle);
+  background: rgba(5, 7, 13, 0.9);
+}
+
+.inputForm {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.inputField {
+  flex-grow: 1;
+  padding: 0.7rem 1rem;
+  border-radius: var(--radius-full);
+  background: rgba(17, 24, 39, 0.8);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+
+  &:focus {
+    outline: none;
+    border-color: var(--ice-blue);
+  }
+}
+
+.sendButton {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-full);
+  background: var(--primary-cobalt);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+
+  &:hover {
+    background: #3b6cff;
+    transform: scale(1.05);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}

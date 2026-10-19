@@ -1,0 +1,526 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.heroSection {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  padding-top: 7.5rem;
+  padding-bottom: 4rem;
+  overflow: hidden;
+
+  @include mobile {
+    padding-top: 6rem;
+    padding-bottom: 3rem;
+  }
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1.08fr 0.92fr;
+  align-items: center;
+  gap: clamp(2rem, 3.5vw, 3.5rem);
+  position: relative;
+  z-index: var(--z-base);
+  width: 100%;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+  }
+}
+
+.leftColumn {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+
+  @media (max-width: 1024px) {
+    max-width: 100%;
+  }
+}
+
+.rightColumn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+
+  @media (max-width: 1024px) {
+    order: 2;
+    max-width: 400px;
+    margin: var(--space-xl) auto 0;
+  }
+}
+
+.statusHeader {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: var(--space-xl);
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-full);
+  background: rgba(17, 24, 39, 0.65);
+  border: 1px solid var(--border-subtle);
+  backdrop-filter: blur(8px);
+  width: fit-content;
+
+  @include mobile {
+    margin-bottom: var(--space-md);
+  }
+}
+
+.signalBeacon {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--status-emerald);
+  box-shadow: 0 0 10px var(--status-emerald);
+  position: relative;
+}
+
+.statusText {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+}
+
+.heroName {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 6.5vw, 5.4rem);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -0.04em;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+
+  .gradientText {
+    background: linear-gradient(135deg, #F5F3EF 20%, #8FD9FF 65%, #2457FF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+.roleTagline {
+  font-family: var(--font-mono);
+  font-size: clamp(0.82rem, 1.3vw, 1.05rem);
+  color: var(--ice-blue);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-lg);
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+
+  .separator {
+    color: var(--muted-text);
+  }
+}
+
+.heroLead {
+  font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+  line-height: 1.65;
+  color: var(--text-secondary);
+  max-width: 650px;
+  margin-bottom: var(--space-2xl);
+
+  strong {
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+
+  @include mobile {
+    margin-bottom: var(--space-xl);
+  }
+}
+
+.actionRow {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  margin-bottom: var(--space-3xl);
+
+  @include mobile {
+    gap: 0.85rem;
+    margin-bottom: var(--space-2xl);
+  }
+}
+
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.85rem 1.85rem;
+  border-radius: var(--radius-full);
+  background: var(--primary-cobalt);
+  color: #FFFFFF;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  transition: all var(--transition-fast);
+  box-shadow: 0 4px 20px -2px rgba(36, 87, 255, 0.45);
+
+  &:hover {
+    background: #3b6cff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px -2px rgba(36, 87, 255, 0.65);
+  }
+}
+
+.btnSecondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.85rem 1.85rem;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  transition: all var(--transition-fast);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--ice-blue);
+    transform: translateY(-2px);
+  }
+}
+
+.socialRow {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: var(--space-lg);
+  max-width: 580px;
+
+  @include mobile {
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+}
+
+.socialLabel {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--muted-text);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.socialLink {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: color var(--transition-fast);
+
+  &:hover {
+    color: var(--ice-blue);
+  }
+}
+
+.scrollIndicator {
+  position: absolute;
+  bottom: 2rem;
+  right: var(--space-xl);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted-text);
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
+}
+
+.scrollLine {
+  width: 32px;
+  height: 1px;
+  background: var(--border-subtle);
+}
+
+// ── Portrait Card (Right Column) ──────────────────────────────
+.portraitCard {
+  position: relative;
+  width: 100%;
+  max-width: 470px;
+  margin: 0 auto;
+  border-radius: var(--radius-lg);
+  padding: 10px;
+  background: linear-gradient(
+    165deg,
+    rgba(36, 87, 255, 0.2) 0%,
+    rgba(14, 21, 37, 0.88) 32%,
+    rgba(7, 11, 20, 0.96) 100%
+  );
+  border: 1px solid rgba(143, 217, 255, 0.22);
+  box-shadow:
+    0 24px 50px -12px rgba(0, 0, 0, 0.75),
+    0 0 36px -12px rgba(36, 87, 255, 0.3);
+  backdrop-filter: blur(12px);
+  overflow: hidden;
+
+  @media (max-width: 1024px) {
+    max-width: 380px;
+  }
+
+  @include mobile {
+    max-width: 310px;
+  }
+}
+
+.portraitCardMedia {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1.05;
+  border-radius: calc(var(--radius-lg) - 6px);
+  overflow: hidden;
+  background-color: #05070d;
+}
+
+.portraitImage {
+  object-fit: cover;
+  object-position: center 18%;
+  transition: transform var(--transition-slow);
+
+  &:hover {
+    transform: scale(1.02);
+  }
+}
+
+.portraitCaption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.95rem 0.85rem 0.7rem;
+  margin-top: 0.6rem;
+  border-top: 1px solid rgba(143, 217, 255, 0.12);
+  background: rgba(9, 14, 26, 0.72);
+  border-radius: 0 0 calc(var(--radius-lg) - 6px) calc(var(--radius-lg) - 6px);
+  text-align: center;
+}
+
+.portraitName {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+.portraitRole {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--ice-blue);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  margin-top: 0.35rem;
+  line-height: 1.3;
+}
+
+
+// ── Portrait + Portal composite ──────────────────────────────
+// Sits inside .rightColumn; gives portrait an absolute reference
+// that matches HeroPortalVisual's own container dimensions.
+.portalComposite {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+
+  @media (max-width: 1024px) {
+    max-width: 300px;
+  }
+}
+
+// Absolute overlay — fills the same space as the portal container
+.portraitLayer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // Never intercept portal mouse-tilt or stardust canvas interactions
+  pointer-events: none;
+  z-index: 5;
+}
+
+// Portrait crop container — sized to occupy the dark center void of the ring
+.portraitMask {
+  position: relative;
+  // ~47% of portal = sits inside the inner portal ring, ring stays visible around it
+  width: 47%;
+  aspect-ratio: 1 / 1.15;
+  // Tight elliptical mask centered on the face (upper-center of photo).
+  // Fades outward so the light photo background becomes invisible against
+  // the dark cosmic scene — no image processing / alpha channel required.
+  mask-image: radial-gradient(
+    ellipse 88% 82% at 50% 36%,
+    rgba(0, 0, 0, 1)   32%,   /* opaque core — face */
+    rgba(0, 0, 0, 0.92) 48%,  /* shoulders, mostly solid */
+    rgba(0, 0, 0, 0.55) 62%,  /* transition — photo bg fades */
+    rgba(0, 0, 0, 0)    76%   /* fully transparent at edges */
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse 88% 82% at 50% 36%,
+    rgba(0, 0, 0, 1)    32%,
+    rgba(0, 0, 0, 0.92) 48%,
+    rgba(0, 0, 0, 0.55) 62%,
+    rgba(0, 0, 0, 0)    76%
+  );
+
+  @media (max-width: 1024px) {
+    width: 50%;
+  }
+}
+
+// The actual photo
+.portraitImg {
+  object-fit: cover;
+  object-position: center 10%; // pull face into upper crop area
+  // Slight desaturation and contrast lift to harmonise with cosmic palette
+  filter: contrast(1.06) saturate(0.78) brightness(0.96);
+}
+
+// Soft cobalt ambient rim — bridges the portrait edges with the portal glow.
+// Positioned behind the image to mask residual background at very edge.
+.portraitAura {
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 50% 40%,
+    transparent 52%,
+    rgba(36, 87, 255, 0.12) 68%,
+    rgba(143, 217, 255, 0.06) 82%,
+    transparent 92%
+  );
+  pointer-events: none;
+  z-index: -1; // behind the photo, above portal
+}
+
+// ── Chapter 00 Living Cosmic Background ───────────────────────
+.heroCosmicBackground {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  user-select: none;
+}
+
+// Ambient soft breathing light pools
+.ambientGlowPrimary {
+  position: absolute;
+  top: 15%;
+  left: 8%;
+  width: 55vw;
+  height: 55vw;
+  max-width: 580px;
+  max-height: 580px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(36, 87, 255, 0.12) 0%,
+    rgba(36, 87, 255, 0.04) 45%,
+    transparent 70%
+  );
+  filter: blur(60px);
+  animation: cosmicFloat 18s ease-in-out infinite alternate;
+  will-change: transform;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+.ambientGlowSecondary {
+  position: absolute;
+  top: 20%;
+  right: 5%;
+  width: 50vw;
+  height: 50vw;
+  max-width: 520px;
+  max-height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(143, 124, 255, 0.09) 0%,
+    rgba(143, 124, 255, 0.03) 50%,
+    transparent 72%
+  );
+  filter: blur(70px);
+  animation: cosmicFloat 24s ease-in-out infinite alternate-reverse;
+  will-change: transform;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+.ambientGlowCyan {
+  position: absolute;
+  bottom: 8%;
+  left: 35%;
+  width: 42vw;
+  height: 42vw;
+  max-width: 420px;
+  max-height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(143, 217, 255, 0.07) 0%,
+    rgba(143, 217, 255, 0.02) 48%,
+    transparent 70%
+  );
+  filter: blur(55px);
+  animation: cosmicFloat 16s ease-in-out infinite alternate;
+  will-change: transform;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+@keyframes cosmicFloat {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(25px, -15px) scale(1.06);
+  }
+  100% {
+    transform: translate(-18px, 20px) scale(0.96);
+  }
+}
+
+.heroCosmicCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+

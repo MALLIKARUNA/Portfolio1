@@ -1,0 +1,86 @@
+// ==============================================================================
+// MALLIKARJUN ALYAL — COSMIC EDITORIAL DESIGN SYSTEM TOKENS
+// ==============================================================================
+
+:root {
+  // Brand Color Palette (Verified Theme)
+  --void-black: #05070D;
+  --deep-navy: #0C1220;
+  --elevated-surface: #111827;
+  --surface-subtle: rgba(17, 24, 39, 0.7);
+  --surface-glass: rgba(12, 18, 32, 0.65);
+  --surface-card: rgba(17, 24, 39, 0.85);
+
+  // Borders & Dividers
+  --border-subtle: rgba(155, 166, 187, 0.12);
+  --border-light: rgba(155, 166, 187, 0.22);
+  --border-accent: rgba(36, 87, 255, 0.35);
+  --border-focus: rgba(143, 217, 255, 0.6);
+
+  // Typography Colors
+  --text-primary: #F5F3EF;     // Warm white
+  --text-secondary: #9BA6BB;   // Slate gray
+  --text-muted: #64748B;       // Cool slate
+  --text-highlight: #FFFFFF;
+
+  // Accents (Purposefully Applied)
+  --primary-cobalt: #2457FF;
+  --cobalt-glow: rgba(36, 87, 255, 0.35);
+  --cobalt-subtle: rgba(36, 87, 255, 0.12);
+
+  --warm-solar: #FFB15C;
+  --solar-glow: rgba(255, 177, 92, 0.3);
+
+  --nebula-violet: #8F7CFF;
+  --violet-glow: rgba(143, 124, 255, 0.3);
+
+  --ice-blue: #8FD9FF;
+  --ice-glow: rgba(143, 217, 255, 0.25);
+
+  --status-emerald: #10B981;
+  --status-emerald-glow: rgba(16, 185, 129, 0.25);
+
+  // Typography Families
+  --font-display: var(--font-space-grotesk), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-body: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: var(--font-ibm-plex-mono), "Fira Code", monospace;
+  --font-serif: var(--font-instrument-serif), Georgia, serif;
+
+  // Spacing Scale
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4.5rem;
+  --space-4xl: 6rem;
+  --space-5xl: 8rem;
+
+  // Max Layout Widths
+  --container-max: 1320px;
+  --container-wide: 1480px;
+  --container-narrow: 920px;
+
+  // Transitions
+  --transition-fast: 180ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 320ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 600ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  // Border Radius
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-full: 9999px;
+
+  // Layering
+  --z-background: -10;
+  --z-canvas: -1;
+  --z-base: 1;
+  --z-dropdown: 20;
+  --z-nav: 50;
+  --z-modal: 100;
+  --z-tooltip: 200;
+}

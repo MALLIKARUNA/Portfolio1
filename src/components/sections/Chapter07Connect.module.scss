@@ -1,0 +1,213 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.connectSection {
+  position: relative;
+  padding: var(--space-5xl) 0 var(--space-4xl) 0;
+  border-top: 1px solid var(--border-subtle);
+  overflow: hidden;
+
+  @include mobile {
+    padding: var(--space-3xl) 0 var(--space-2xl) 0;
+  }
+}
+
+.horizonGlow {
+  position: absolute;
+  bottom: -150px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(36, 87, 255, 0.22), rgba(143, 124, 255, 0.08), transparent 70%);
+  pointer-events: none;
+  filter: blur(40px);
+}
+
+.connectGrid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: var(--space-4xl);
+  align-items: flex-start;
+  position: relative;
+  z-index: var(--z-base);
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+  }
+}
+
+.leftCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.connectHeading {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.connectLead {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-2xl);
+}
+
+.channelsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-bottom: var(--space-2xl);
+}
+
+.channelItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.85rem 1.25rem;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  transition: all var(--transition-fast);
+
+  &:hover {
+    background: rgba(36, 87, 255, 0.08);
+    border-color: var(--border-accent);
+    transform: translateX(4px);
+  }
+}
+
+.channelIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  background: rgba(36, 87, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ice-blue);
+}
+
+.channelInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.channelName {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.channelDetail {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+// Interactive Message Form Box
+.formCard {
+  @include elevated-card;
+  padding: var(--space-2xl);
+  background: var(--surface-card);
+
+  @include mobile {
+    padding: var(--space-lg);
+  }
+}
+
+.formTitle {
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xs);
+}
+
+.formSubtitle {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-xl);
+}
+
+.formGroup {
+  margin-bottom: var(--space-md);
+}
+
+.formLabel {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.formInput,
+.formTextarea,
+.formSelect {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm);
+  background: rgba(5, 7, 13, 0.7);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 0.925rem;
+  transition: all var(--transition-fast);
+
+  &:focus {
+    outline: none;
+    border-color: var(--ice-blue);
+    box-shadow: 0 0 14px -2px var(--cobalt-glow);
+  }
+}
+
+.formTextarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.submitBtn {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 0.85rem 1.75rem;
+  border-radius: var(--radius-full);
+  background: var(--primary-cobalt);
+  color: #FFFFFF;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  transition: all var(--transition-fast);
+  box-shadow: 0 4px 20px -2px rgba(36, 87, 255, 0.45);
+  margin-top: var(--space-sm);
+
+  &:hover {
+    background: #3b6cff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px -2px rgba(36, 87, 255, 0.65);
+  }
+}
+
+.successMessage {
+  padding: 1.5rem;
+  border-radius: var(--radius-sm);
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: #34D399;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  text-align: center;
+  line-height: 1.6;
+}

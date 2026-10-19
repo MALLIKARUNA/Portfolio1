@@ -1,0 +1,172 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.thinkingSection {
+  position: relative;
+  padding: var(--space-5xl) 0;
+  border-top: 1px solid var(--border-subtle);
+
+  @include mobile {
+    padding: var(--space-3xl) 0;
+  }
+}
+
+.pillarsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-xl);
+  margin-bottom: var(--space-4xl);
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+}
+
+.pillarCard {
+  @include elevated-card;
+  padding: var(--space-2xl);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  @include mobile {
+    padding: var(--space-lg);
+  }
+}
+
+.pillarNum {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--ice-blue);
+  letter-spacing: 0.08em;
+  margin-bottom: var(--space-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.pillarTitle {
+  font-size: 1.35rem;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+  font-weight: 600;
+}
+
+.pillarConcept {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-lg);
+}
+
+.practicalBox {
+  background: rgba(5, 7, 13, 0.6);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.25rem;
+  margin-top: auto;
+}
+
+.practicalLabel {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  color: var(--warm-solar);
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.practicalText {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.evidenceRef {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--muted-text);
+  margin-top: 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+// PRD Evidence Showcase
+.prdShowcase {
+  @include elevated-card;
+  padding: var(--space-2xl);
+  background: linear-gradient(135deg, rgba(12, 18, 32, 0.9), rgba(17, 24, 39, 0.75));
+  border: 1px solid rgba(143, 124, 255, 0.3);
+
+  @include mobile {
+    padding: var(--space-lg);
+  }
+}
+
+.prdGrid {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: var(--space-3xl);
+  align-items: center;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+}
+
+.prdBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  background: rgba(143, 124, 255, 0.12);
+  border: 1px solid rgba(143, 124, 255, 0.35);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--nebula-violet);
+  margin-bottom: var(--space-md);
+}
+
+.prdHeading {
+  font-size: clamp(1.5rem, 2.5vw, 2.1rem);
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.prdBody {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: var(--space-lg);
+}
+
+.principlesList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.principleItem {
+  background: rgba(5, 7, 13, 0.7);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem 1.15rem;
+}
+
+.principleName {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.2rem;
+}
+
+.principleDetail {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
