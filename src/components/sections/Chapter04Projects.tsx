@@ -4,22 +4,20 @@ import React, { useState } from "react";
 import Image from "next/image";
 import styles from "./Chapter04Projects.module.scss";
 import { PROJECTS } from "@/data/portfolioData";
-import { ProjectCaseStudy } from "@/types";
-import { ProjectModal } from "@/components/projects/ProjectModal";
-import { motion } from "motion/react";
-import { ArrowUpRight, Award, Sparkles } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
+import { ArrowUpRight, ExternalLink, Sparkles } from "lucide-react";
 import { GithubIcon } from "@/components/icons/BrandIcons";
 
 export function Chapter04Projects() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const [activeModalProject, setActiveModalProject] = useState<ProjectCaseStudy | null>(null);
 
   const categories = [
     { id: "all", label: "All Projects" },
-    { id: "AI & Computer Vision", label: "AI & Computer Vision" },
-    { id: "Product Architecture", label: "Product Architecture" },
-    { id: "Frontend & Interface", label: "Frontend & Interface" },
-    { id: "Systems & API", label: "Systems & API" },
+    { id: "AI & Systems", label: "AI & Systems" },
+    { id: "Full Stack", label: "Full Stack" },
+    { id: "Frontend", label: "Frontend" },
+    { id: "Web Applications", label: "Web Applications" },
+    { id: "Personal Websites", label: "Personal Websites" },
   ];
 
   const filteredProjects =
@@ -30,119 +28,126 @@ export function Chapter04Projects() {
   return (
     <section id="chapter-04" className={styles.projectsSection}>
       <div className="container">
-        {/* Section Header */}
-        <div className="section-label">
-          <span>Chapter 04 · Ideas Made Real</span>
-        </div>
 
-        <h2 className="section-title">Selected Work & Case Studies</h2>
+        <h2 className="section-title">Selected Work & Real Projects</h2>
         <p className="section-lead">
-          Real projects that solve tangible problems. Each case study details the core challenge,
-          architectural trade-offs, technologies used, and lessons learned during implementation.
+          Verified applications, full-stack architectures, and web experiments built with modern
+          technologies. Each entry reflects the authentic codebase, technical scope, and verified
+          implementation status.
         </p>
 
         {/* Category Filters */}
-        <div className={styles.filterBar}>
+        <div className={styles.filterBar} role="tablist" aria-label="Project categories">
           {categories.map((cat) => (
             <button
               key={cat.id}
               type="button"
+              role="tab"
+              aria-selected={selectedCategory === cat.id}
               className={`${styles.filterBtn} ${
                 selectedCategory === cat.id ? styles.activeFilter : ""
               }`}
               onClick={() => setSelectedCategory(cat.id)}
             >
               <span>{cat.label}</span>
+              <span className={styles.filterCount}>
+                {cat.id === "all"
+                  ? PROJECTS.length
+                  : PROJECTS.filter((p) => p.category === cat.id).length}
+              </span>
             </button>
           ))}
         </div>
 
         {/* Projects Grid */}
         <div className={styles.projectsGrid}>
-          {filteredProjects.map((project, idx) => (
-            <motion.div
-              key={project.id}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: idx * 0.08 }}
-              className={styles.projectCard}
-              onClick={() => setActiveModalProject(project)}
-            >
-              {/* Card Media */}
-              <div className={styles.cardMedia}>
-                {project.category === "Hackathon Winner" && (
-                  <div className={styles.featuredBadge}>
-                    <Award size={13} color="#FFB15C" />
-                    <span>Hackathon 1st Place</span>
-                  </div>
-                )}
-
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 540px"
-                  className={styles.imageHoverZoom}
-                />
-              </div>
-
-              {/* Card Content */}
-              <div className={styles.cardContent}>
-                <div className={styles.cardMetaRow}>
-                  <span className={styles.categoryTag}>{project.category}</span>
-                  <span className={styles.timelineTag}>{project.timeline.split("·")[0]}</span>
-                </div>
-
-                <h3 className={styles.projectTitle}>{project.title}</h3>
-                <p className={styles.projectTagline}>{project.tagline}</p>
-
-                {/* Tech Stack Pills */}
-                <div className={styles.techPillsRow}>
-                  {project.techStack.slice(0, 4).map((tech) => (
-                    <span key={tech} className="tag-pill">
-                      {tech}
-                    </span>
-                  ))}
-                  {project.techStack.length > 4 && (
-                    <span className="tag-pill" style={{ color: "var(--ice-blue)" }}>
-                      +{project.techStack.length - 4} more
-                    </span>
+          <AnimatePresence mode="popLayout">
+            {filteredProjects.map((project, idx) => (
+              <motion.div
+                key={project.id}
+                layout
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.98 }}
+                transition={{ duration: 0.35, delay: idx * 0.04 }}
+                className={`${styles.projectCard} ${project.featured ? styles.featuredCard : ""}`}
+              >
+                {/* Card Media Preview */}
+                <div className={styles.cardMedia}>
+                  {project.status && (
+                    <div className={styles.statusBadge}>
+                      <span className={styles.statusDot} />
+                      <span>{project.status}</span>
+                    </div>
                   )}
+
+                  <Image
+                    src={project.image}
+                    alt={`${project.title} interface preview`}
+                    fill
+                    sizes="(max-width: 680px) 100vw, (max-width: 1120px) 50vw, 400px"
+                    className={styles.imageHoverZoom}
+                  />
+                  <div className={styles.mediaOverlay} />
                 </div>
 
-                {/* Card Actions */}
-                <div className={styles.cardActions}>
-                  <div className={styles.caseStudyBtn}>
-                    <span>Read Case Study</span>
-                    <ArrowUpRight size={15} />
+                {/* Card Content */}
+                <div className={styles.cardContent}>
+                  <div className={styles.cardMetaRow}>
+                    <span className={styles.categoryTag}>{project.category}</span>
+                    {project.featured && (
+                      <span className={styles.featuredTag}>Featured</span>
+                    )}
                   </div>
 
-                  {project.githubUrl && (
+                  <h3 className={styles.projectTitle}>{project.title}</h3>
+                  <p className={styles.projectDescription}>{project.description}</p>
+
+                  {/* Tech Stack Pills */}
+                  <div className={styles.techPillsRow}>
+                    {project.techStack.map((tech) => (
+                      <span key={tech} className={styles.techPill}>
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Explicit Accessible Action Links (No popup/modal) */}
+                  <div className={styles.cardActions}>
                     <a
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={styles.githubIconLink}
-                      onClick={(e) => e.stopPropagation()}
-                      title="View GitHub Repository"
-                      aria-label={`${project.title} GitHub repository`}
+                      className={styles.sourceBtn}
+                      title={`View ${project.title} repository on GitHub`}
+                      aria-label={`View source code for ${project.title} on GitHub (opens in new tab)`}
                     >
-                      <GithubIcon size={15} />
+                      <GithubIcon size={16} />
+                      <span>View Source</span>
+                      <ExternalLink size={13} className={styles.linkArrow} />
                     </a>
-                  )}
+
+                    {project.liveUrl && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.liveDemoBtn}
+                        title={`Open live deployment for ${project.title}`}
+                        aria-label={`Open live deployment for ${project.title} (opens in new tab)`}
+                      >
+                        <Sparkles size={14} />
+                        <span>Live Demo</span>
+                        <ArrowUpRight size={15} className={styles.linkArrow} />
+                      </a>
+                    )}
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </div>
       </div>
-
-      {/* Case Study Deep Dive Modal */}
-      <ProjectModal
-        project={activeModalProject}
-        onClose={() => setActiveModalProject(null)}
-      />
     </section>
   );
 }

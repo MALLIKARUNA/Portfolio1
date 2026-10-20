@@ -41,10 +41,7 @@ export function Footer() {
     { label: "Genesis & Purpose", id: "#chapter-00", num: "00" },
     { label: "The Beginning", id: "#chapter-01", num: "01" },
     { label: "How I Build", id: "#chapter-02", num: "02" },
-    { label: "Product Thinking", id: "#chapter-03", num: "03" },
     { label: "Selected Work", id: "#chapter-04", num: "04" },
-    { label: "Milestones & Proof", id: "#chapter-05", num: "05" },
-    { label: "Perspective", id: "#chapter-06", num: "06" },
     { label: "Get in Touch", id: "#chapter-07", num: "07" },
   ];
 

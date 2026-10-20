@@ -31,10 +31,7 @@ export function Navbar({ onOpenAI }: NavbarProps) {
       "chapter-00",
       "chapter-01",
       "chapter-02",
-      "chapter-03",
       "chapter-04",
-      "chapter-05",
-      "chapter-06",
       "chapter-07",
     ];
 
@@ -70,10 +67,7 @@ export function Navbar({ onOpenAI }: NavbarProps) {
   const navItems = [
     { label: "Journey", id: "#chapter-01" },
     { label: "Systems", id: "#chapter-02" },
-    { label: "Thinking", id: "#chapter-03" },
     { label: "Work", id: "#chapter-04" },
-    { label: "Milestones", id: "#chapter-05" },
-    { label: "Perspective", id: "#chapter-06" },
     { label: "Connect", id: "#chapter-07" },
   ];
 

@@ -7,10 +7,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Chapter00Hero } from "@/components/sections/Chapter00Hero";
 import { Chapter01Journey } from "@/components/sections/Chapter01Journey";
 import { Chapter02Build } from "@/components/sections/Chapter02Build";
-import { Chapter03Thinking } from "@/components/sections/Chapter03Thinking";
 import { Chapter04Projects } from "@/components/sections/Chapter04Projects";
-import { Chapter05Milestones } from "@/components/sections/Chapter05Milestones";
-import { Chapter06Perspective } from "@/components/sections/Chapter06Perspective";
 import { Chapter07Connect } from "@/components/sections/Chapter07Connect";
 import { AskAssistant } from "@/components/ai/AskAssistant";
 
@@ -36,10 +33,7 @@ export default function Home() {
         <Chapter00Hero />
         <Chapter01Journey />
         <Chapter02Build />
-        <Chapter03Thinking />
         <Chapter04Projects />
-        <Chapter05Milestones />
-        <Chapter06Perspective />
         <Chapter07Connect />
       </main>
 

@@ -2,7 +2,7 @@
 // MALLIKARJUN ALYAL — PORTFOLIO DATA (VERIFIED SINGLE SOURCE OF TRUTH)
 // ==============================================================================
 
-import { ProjectCaseStudy, JourneyMilestone, ProductThinkingStep, TechItem } from "@/types";
+import { ProjectCaseStudy, JourneyMilestone, TechItem } from "@/types";
 
 export const PERSONAL_INFO = {
   name: "Mallikarjun Alyal",
@@ -31,504 +31,308 @@ export const CHAPTERS = [
   { id: "chapter-00", number: "00", title: "The Signal", subtitle: "Introduction" },
   { id: "chapter-01", number: "01", title: "The Beginning", subtitle: "My Journey" },
   { id: "chapter-02", number: "02", title: "Learning to Build", subtitle: "Systems & Architecture" },
-  { id: "chapter-03", number: "03", title: "Thinking Beyond Code", subtitle: "UI/UX & Product Thinking" },
   { id: "chapter-04", number: "04", title: "Ideas Made Real", subtitle: "Selected Work" },
-  { id: "chapter-05", number: "05", title: "Moments That Mattered", subtitle: "Milestones & Achievements" },
-  { id: "chapter-06", number: "06", title: "What Moves Me", subtitle: "Reflections & Philosophy" },
   { id: "chapter-07", number: "07", title: "The Open Loop", subtitle: "Let's Connect" },
 ];
 
 export const PROJECTS: ProjectCaseStudy[] = [
   {
-    id: "routeforge",
-    slug: "routeforge",
-    title: "RouteForge",
-    tagline: "AI-Based Smart Logistics & Accessibility Intelligence Platform for India's North Eastern Region (NER)",
-    category: "Systems & API",
-    role: "Full-Stack Developer & Architecture",
-    timeline: "August 2026",
+    id: "disastra",
+    slug: "disastra",
+    title: "DISASTRA — Adaptive Multi-Hazard Disaster Response Platform",
+    tagline: "Adaptive incident intelligence and coordination prototype with human-in-the-loop decision workflows.",
+    category: "AI & Systems",
+    status: "Prototype (Simulated Data)",
     featured: true,
-    image: "/images/cosmic/01-rocket-launch.jpg",
-    context:
-      "Prototyped a logistics and route safety platform designed to explore the mission-critical question: 'Which route is currently safest and most practical for moving essential supplies in difficult terrain?'",
-    problem:
-      "The North Eastern Region (NER) of India suffers from extreme terrain, seasonal monsoons, landslides, and unpredictable infrastructure failures. Supply convoys face hazardous conditions without unified, real-time risk assessment or offline communication support.",
-    myContribution:
-      "Led the core platform architecture and full-stack implementation: built the GIS routing integration using Leaflet and OpenRouteService, structured the multi-criteria risk engine, integrated OpenWeatherMap alerts, and engineered the offline incident queue with Dexie.js (IndexedDB).",
+    image: "/images/projects/disastra.png",
+    description:
+      "An adaptive multi-hazard response platform prototype designed to integrate official alerts, environmental data, citizen SOS reports, and responder assignments, providing human-in-the-loop coordination recommendations with simulated situational data.",
     techStack: [
-      "Next.js",
-      "React",
-      "TypeScript",
-      "Node.js",
-      "Express.js",
-      "PostgreSQL",
-      "Prisma ORM",
-      "Leaflet GIS",
-      "OpenRouteService",
-      "OpenWeatherMap",
-      "Zustand",
-      "Dexie.js (IndexedDB)",
-      "Docker Compose",
-    ],
-    keyDecisions: [
-      {
-        title: "Deterministic Risk Engine over Black-Box AI",
-        rationale:
-          "For relief convoy safety, route scores must be transparent and explainable. The engine computes weighted risk scores (weather severity + road grade + historical landslides + report freshness) with clear human approval checkpoints before route recalculation.",
-      },
-      {
-        title: "Offline-First Incident Queue with IndexedDB",
-        rationale:
-          "Because cellular connectivity vanishes in remote mountain passes, field drivers can log road closures and attach geotagged photos offline. Entries are synced automatically via a background queue upon signal restoration.",
-      },
-      {
-        title: "Multi-Criteria Route Evaluation",
-        rationale:
-          "Instead of merely calculating the shortest distance, RouteForge compares primary, secondary, and emergency relief corridors across elevation variance, weather hazard exposure, and transit stability.",
-      },
-    ],
-    challenges:
-      "Balancing heavy spatial calculations on low-bandwidth field devices without lag. Overcame this by performing heavy routing calculations server-side and caching vector tiles and incident markers locally on the client.",
-    outcome:
-      "Engineered an end-to-end prototype demonstrating multi-route comparison, simulated landslide blockage, real-time rerouting, and coordinator dispatch workflow.",
-    whatILearned:
-      "Real-world engineering demands fault tolerance: offline resilience, transparent algorithmic decisions, and prioritizing user safety above aesthetic gimmicks.",
-    githubUrl: "https://github.com/MALLIKARUNA",
-    stats: [
-      { label: "Focus", value: "GIS & Routing" },
-      { label: "Stack", value: "Full-Stack TS" },
-      { label: "Status", value: "Prototype Complete" },
-    ],
-  },
-  {
-    id: "ai-smart-classroom",
-    slug: "ai-smart-classroom",
-    title: "AI Smart Classroom Monitoring System",
-    tagline: "Autonomous Surveillance, Behavioral Intelligence & Multi-Classroom Command Center",
-    category: "AI & Computer Vision",
-    role: "Full-Stack Developer (FastAPI + Next.js UI + Pipeline)",
-    timeline: "October 2026",
-    featured: true,
-    image: "/images/projects/smart-classroom.png",
-    previewImages: [
-      "/images/projects/smart-classroom.png",
-      "/images/projects/classroom-session.png",
-      "/images/projects/active-alerts.png",
-    ],
-    context:
-      "Academic blocks and computer laboratories face challenges monitoring student safety, exam integrity, and engagement across multiple classrooms simultaneously.",
-    problem:
-      "Passive CCTV footage only records incidents without preventing escalation. Security and faculty cannot manually watch dozens of video feeds simultaneously to catch emergencies like physical altercations or severe disengagement.",
-    myContribution:
-      "Co-developed the unified dual-model YOLOv8 pipeline, FastAPI backend services, low-latency live MJPEG stream handler, custom SVG telemetry charts, automated screenshot retention with 60-day purge policy, and ReportLab server-side PDF generator.",
-    techStack: [
-      "FastAPI (Python 3.11)",
-      "Next.js 16",
       "React 19",
       "TypeScript",
-      "YOLOv8 (Ultralytics)",
-      "PyTorch",
-      "OpenCV",
-      "SQLite3",
-      "ReportLab PDF",
-      "SCSS Modules",
+      "Vite",
+      "Tailwind CSS",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "Leaflet",
     ],
-    keyDecisions: [
-      {
-        title: "Dual-Model YOLO Pipeline",
-        rationale:
-          "Separated general object detection (COCO model for laptops, phones, chairs) from student behavioral classification (custom fine-tuned model for 7 behaviors: Fighting, Sleeping, Using Phone, Reading, Writing, Hand Raising, and Eating) to optimize inference speed and accuracy.",
-      },
-      {
-        title: "10-Minute Alert Flooding Protection",
-        rationale:
-          "To avoid alert fatigue for room supervisors, built an automatic 600-second cooldown per classroom and alert type, consolidating ongoing events into one incident session rather than spamming continuous popups.",
-      },
-      {
-        title: "Priority Fighting Emergency Modal",
-        rationale:
-          "Designed an instant full-screen alert overlay with automated evidence snapshot and audible alarm whenever physical altercation confidence exceeds the threshold.",
-      },
-    ],
-    challenges:
-      "Maintaining high-FPS live video streaming with simultaneous inference bounding boxes over HTTP. Solved by decoupling frame grabbing from model prediction threads using an asynchronous queue.",
-    outcome:
-      "Working end-to-end command center running with live multi-camera onboarding, dynamic occupancy counting, interactive engagement charts, and executive PDF report export.",
-    whatILearned:
-      "Computer vision engineering is only as useful as the human interface consuming it. Reducing false alarms and providing clean incident evidence is crucial for operational trust.",
-    githubUrl: "https://github.com/MALLIKARUNA",
-    stats: [
-      { label: "Behaviors Tracked", value: "7 Classes" },
-      { label: "Cooldown", value: "600s Anti-Fatigue" },
-      { label: "Pipeline", value: "Dual YOLOv8" },
-    ],
+    githubUrl: "https://github.com/MALLIKARUNA/DISASTRA",
   },
   {
     id: "placement-command",
     slug: "placement-command",
-    title: "Placement Command",
-    tagline: "Intelligent Campus Placement & Conflict-Free Interview Scheduling Platform",
-    category: "Product Architecture",
-    role: "Product Specification Author & Backend Architect",
-    timeline: "October 2026",
+    title: "Placement Command — Campus Placement & Interview Scheduling",
+    tagline: "Centralized placement operations and conflict-free interview coordination platform.",
+    category: "Full Stack",
+    status: "In Development",
     featured: true,
     image: "/images/projects/placement-command.png",
-    previewImages: [
-      "/images/projects/placement-command.png",
-    ],
-    context:
-      "Campus placement drives involve hundreds of students, dozens of recruiting companies, limited interview cabins, and shifting panel availability. Manual spreadsheets inevitably cause room conflicts and delayed schedules.",
-    problem:
-      "Coordinating interviews across competing student schedules, interviewer delays, and room constraints leads to chaotic delays, missed opportunities, and communication breakdowns.",
-    myContribution:
-      "Authored the exhaustive 52KB / 105KB Product Requirements Document (PRD v1.2) detailing 21 functional modules, database constraints, business rules, and state machines. Implemented the core scheduling and allocation algorithms.",
+    description:
+      "A centralized campus recruitment management platform engineered to coordinate student eligibility criteria, company drives, interview slots, and panel allocation, featuring database-backed scheduling and conflict-detection workflows.",
     techStack: [
+      "React 19",
       "TypeScript",
-      "Fastify",
-      "PostgreSQL",
-      "Supabase Realtime",
-      "Kysely",
-      "Zod",
-      "Vitest",
-      "React",
       "Vite",
+      "Tailwind CSS",
+      "Node.js",
+      "Express",
+      "PostgreSQL",
+      "Zod",
     ],
-    keyDecisions: [
-      {
-        title: "PostgreSQL btree_gist Exclusion Constraints",
-        rationale:
-          "Guaranteed 100% collision-free scheduling at the database level using PostgreSQL exclusion constraints over half-open timestamp intervals (`tstzrange`), preventing overlapping appointments for students, panel members, and rooms regardless of concurrency.",
-      },
-      {
-        title: "Simulate → Propose → Approve → Publish Recovery Loop",
-        rationale:
-          "When an interviewer is delayed or absent, the system does not silently rearrange appointments. It runs a deterministic simulation, generates ranked recovery options with delay propagation metrics, and requires explicit coordinator approval before updating published schedules.",
-      },
-      {
-        title: "Decoupled Eligibility from Allocation",
-        rationale:
-          "Separated eligibility checking (rule-based evaluation of CGPA, backlogs, branch) from slot allocation, ensuring that student qualifications remain verifiable and auditable independently of interview capacity.",
-      },
-    ],
-    challenges:
-      "Designing complex interval overlap queries that remain fast under high concurrency during mass recruitment drives. Solved using specialized GiST indexes.",
-    outcome:
-      "Complete implementation-ready specification with formal module contracts (M01 to M20), deterministic allocation engines, and conflict recovery workflows.",
-    whatILearned:
-      "Rigorous software engineering begins with deep problem framing and strict architectural contracts before writing code. Enforcing constraints in the database prevents catastrophic bugs in the UI.",
-    githubUrl: "https://github.com/MALLIKARUNA",
-    stats: [
-      { label: "PRD Spec", value: "52KB / 21 Modules" },
-      { label: "Conflict Guarantee", value: "btree_gist GiST" },
-      { label: "Status", value: "Core Architecture" },
-    ],
+    githubUrl: "https://github.com/MALLIKARUNA/Campus-interview-main--1-",
   },
   {
     id: "movieverse",
     slug: "movieverse",
-    title: "MovieVerse",
-    tagline: "Dynamic Cinema Discovery & Interactive Media Explorer",
-    category: "Frontend & Interface",
-    role: "Frontend Developer & UI Designer",
-    timeline: "2026",
+    title: "MovieVerse — Movie Discovery & Browsing",
+    tagline: "Responsive entertainment discovery application with categorized browsing and animated search.",
+    category: "Frontend",
+    status: "Frontend Project",
     featured: false,
-    image: "/images/cosmic/02-portal-ring.jpg",
-    context:
-      "A personal project exploring modern client-side routing, responsive component hierarchies, and interactive media browsing.",
-    problem:
-      "Creating a smooth, responsive film discovery application that handles asynchronous API pagination, dynamic category filtering, and modal detail views without layout shifts.",
-    myContribution:
-      "Designed and coded the responsive interface, implemented TMDB REST API integrations, configured client-side routing with React Router, and crafted custom search and filter states.",
+    image: "/images/projects/movieverse.png",
+    description:
+      "A responsive entertainment discovery web application featuring categorized movie and show collections, animated search filtering, detail view layouts, and client-side page routing.",
     techStack: [
-      "React",
+      "React 19",
       "TypeScript",
-      "React Router",
-      "REST APIs (TMDB)",
-      "SCSS Modules",
-      "CSS Grid & Flexbox",
+      "Vite",
+      "Tailwind CSS",
+      "React Router 7",
     ],
-    keyDecisions: [
-      {
-        title: "Component Reusability",
-        rationale:
-          "Architected atomic card and modal components that handle image loading fallbacks and responsive metadata cleanly across mobile and desktop viewports.",
-      },
-      {
-        title: "Debounced Search Experience",
-        rationale:
-          "Implemented custom debounced input hooks to reduce unnecessary external API calls while providing instant UI feedback.",
-      },
-    ],
-    challenges:
-      "Managing asynchronous image load times from external CDNs. Handled with custom skeleton states and smooth fade-in transitions.",
-    outcome:
-      "Clean, responsive, interactive movie discovery application demonstrating solid React fundamentals and modern TypeScript patterns.",
-    whatILearned:
-      "The value of fluid interface states, graceful loading skeletons, and thoughtful error handling when working with external third-party APIs.",
-    githubUrl: "https://github.com/MALLIKARUNA",
-    stats: [
-      { label: "Type", value: "Web App" },
-      { label: "Language", value: "TypeScript" },
-    ],
+    githubUrl: "https://github.com/MALLIKARUNA/Movieverse",
   },
   {
-    id: "backend-storage-pipeline",
-    slug: "backend-storage-pipeline",
-    title: "Notes API & Cloud Storage Service",
-    tagline: "Exploration of HTTP Request Lifecycles, Multer RAM Buffers & Cloud Storage Integrations",
-    category: "Systems & API",
-    role: "Backend Developer (Learning & Architecture)",
-    timeline: "September – October 2026",
+    id: "stylehub",
+    slug: "stylehub",
+    title: "StyleHub — Fashion E-commerce Storefront",
+    tagline: "Modern fashion storefront with dynamic product showcase and interactive cart interface.",
+    category: "Frontend",
+    status: "Interactive Demo",
     featured: false,
-    image: "/images/cosmic/03-light-ribbons.jpg",
-    context:
-      "A series of deep backend experiments focused on mastering the Node.js runtime, Express middleware pipelines, RESTful status contracts, MongoDB Atlas document modeling, and multipart file upload flows.",
-    problem:
-      "Understanding how files actually travel from a client request through the server to cloud storage without causing disk bloat or server memory leaks.",
-    myContribution:
-      "Built custom Express.js middleware, designed MongoDB schemas with Mongoose, and engineered a memory-buffer upload pipeline with Multer (`memoryStorage`) that forwards binary streams to ImageKit cloud storage and saves the returned media URL in the database.",
+    image: "/images/projects/stylehub.png",
+    description:
+      "A responsive fashion retail storefront featuring a curated hero showcase, categorized product catalogs (Men & Women), responsive shopping cart state management, and smooth scroll navigation.",
     techStack: [
-      "Node.js",
-      "Express.js",
-      "MongoDB Atlas",
-      "Mongoose",
-      "Multer (memoryStorage)",
-      "ImageKit SDK",
-      "Postman",
+      "React 19",
+      "Tailwind CSS",
+      "JavaScript",
+      "React Router 7",
+      "Vite",
     ],
-    keyDecisions: [
-      {
-        title: "RAM Buffer over Disk Storage",
-        rationale:
-          "Configured Multer with `memoryStorage()` to keep uploaded files in RAM as temporary buffers before direct cloud dispatch, avoiding disk cleanup overhead on stateless servers.",
-      },
-      {
-        title: "Strict REST Status Code Conventions",
-        rationale:
-          "Maintained explicit HTTP status discipline (200 OK, 201 Created, 400 Bad Request, 401 Unauthorized, 403 Forbidden, 404 Not Found, 500 Server Error) across all CRUD endpoints.",
-      },
+    githubUrl: "https://github.com/MALLIKARUNA/StyleHub",
+    liveUrl: "https://style-hub-seven-omega.vercel.app/",
+  },
+  {
+    id: "note-application",
+    slug: "note-application",
+    title: "NOTE-APPLICATION — Local Storage Notes Manager",
+    tagline: "Reactive personal notes application with persistent browser storage synchronization.",
+    category: "Web Applications",
+    status: "Web Application",
+    featured: false,
+    image: "/images/projects/note-application.png",
+    description:
+      "A clean, reactive productivity application enabling instant creation, viewing, and deletion of structured personal notes with persistent client-side browser localStorage synchronization.",
+    techStack: [
+      "React 19",
+      "TypeScript",
+      "Tailwind CSS",
+      "Vite",
+      "LocalStorage API",
     ],
-    challenges:
-      "Debugging buffer streaming issues between Multer multipart parsing and ImageKit upload authentication headers. Resolved by inspecting raw request payloads and standardizing error response schemas.",
-    outcome:
-      "Solid, verified grasp of the complete request lifecycle: Client → Multer → req.file.buffer → Storage Service → Cloud CDN → MongoDB URL persistence.",
-    whatILearned:
-      "Backend reliability comes from understanding buffers, streams, asynchronous lifecycle management, and clear protocol semantics.",
-    githubUrl: "https://github.com/MALLIKARUNA",
-    stats: [
-      { label: "Focus", value: "HTTP & Buffers" },
-      { label: "Database", value: "MongoDB Atlas" },
+    githubUrl: "https://github.com/MALLIKARUNA/NOTE-APPLICATION",
+  },
+  {
+    id: "weather-app",
+    slug: "weather-app",
+    title: "Weather App — Real-Time Meteorological Search",
+    tagline: "Lightweight city weather search application powered by the OpenWeatherMap REST API.",
+    category: "Web Applications",
+    status: "API Application",
+    featured: false,
+    image: "/images/projects/weather-app.png",
+    description:
+      "A lightweight meteorological search tool built with vanilla JavaScript that queries the OpenWeatherMap REST API to retrieve and display current temperature, atmospheric conditions, and city metrics.",
+    techStack: [
+      "JavaScript (ES6+)",
+      "HTML5",
+      "CSS3",
+      "OpenWeatherMap API",
+      "Fetch API",
     ],
+    githubUrl: "https://github.com/MALLIKARUNA/weather-app",
+  },
+  {
+    id: "portfolio-early",
+    slug: "portfolio-early",
+    title: "Personal Portfolio Website — Early Foundation",
+    tagline: "Foundational multi-page personal website built with semantic HTML5, CSS3, and JavaScript.",
+    category: "Personal Websites",
+    status: "Early Web Project",
+    featured: false,
+    image: "/images/projects/portfolio.png",
+    description:
+      "A foundational multi-page personal website crafted with semantic HTML5, CSS3 Grid/Flexbox layouts, and custom responsive styling to introduce personal bio, skills, and initial coding projects.",
+    techStack: [
+      "HTML5",
+      "CSS3",
+      "JavaScript",
+      "Responsive Design",
+      "Flexbox & Grid",
+    ],
+    githubUrl: "https://github.com/MALLIKARUNA/PORTFOLIO",
+  },
+  {
+    id: "portfolio1",
+    slug: "portfolio1",
+    title: "Portfolio1 — Next.js Personal Portfolio Website",
+    tagline: "Modern personal portfolio with Next.js App Router, modular SCSS, and WebGL cosmic canvas.",
+    category: "Personal Websites",
+    status: "Active Portfolio",
+    featured: false,
+    image: "/images/projects/portfolio1.png",
+    description:
+      "An evolving, modern personal portfolio website built with Next.js App Router, TypeScript, and modular SCSS, featuring dynamic chapter navigation, responsive editorial typography, and interactive WebGL background effects.",
+    techStack: [
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "SCSS Modules",
+      "Three.js",
+      "Framer Motion",
+    ],
+    githubUrl: "https://github.com/MALLIKARUNA/Portfolio1",
   },
 ];
 
 export const TECHNICAL_SKILLS: TechItem[] = [
-  // Frontend
+  // Programming Languages
   {
-    name: "React & Next.js (App Router)",
-    category: "frontend",
+    name: "C",
+    category: "languages",
+    status: "practiced",
+    description: "A programming language used to learn core programming concepts.",
+    details: "Explored as a foundational language to learn core procedural programming, memory pointers, control structures, and computational logic.",
+    projectName: "Engineering Foundations (BITM)",
+    projectLink: "#chapter-01",
+    keyConcepts: ["Core Programming Concepts", "Memory & Pointers", "Control Flow", "Structured Logic"],
+  },
+  {
+    name: "C++",
+    category: "languages",
+    status: "practiced",
+    description: "A programming language used for programming fundamentals and data structures.",
+    details: "Utilized to study object-oriented principles, explore classic data structures, and practice algorithmic problem-solving.",
+    projectName: "Engineering Foundations (BITM)",
+    projectLink: "#chapter-01",
+    keyConcepts: ["Programming Fundamentals", "Data Structures", "Object-Oriented Logic", "Problem-Solving"],
+  },
+  {
+    name: "JavaScript",
+    category: "languages",
     status: "demonstrated",
-    description: "Production components, server/client boundaries, dynamic routing",
-    details: "Architected dynamic interfaces with Next.js App Router, combining client-side interactivity and server-rendered data loading.",
-    projectName: "AI Smart Classroom Frontend",
+    description: "A programming language for interactive web experiences and server-side development with Node.js.",
+    details: "Applied across client-side web applications for interactive user experiences and server-side backend services with Node.js.",
+    projectName: "Portfolio & Web Projects",
     projectLink: "#chapter-04",
-    keyConcepts: ["App Router Architecture", "Server/Client Boundaries", "State Hydration"],
+    keyConcepts: ["ES6+ Syntax", "Asynchronous Events", "DOM Manipulation", "Full-Stack Scripting"],
   },
   {
     name: "TypeScript",
-    category: "frontend",
+    category: "languages",
     status: "demonstrated",
-    description: "Strict domain typing, generics, interface contracts",
-    details: "Enforced strict static typing, explicit API response interfaces, and generic utility types across frontend code and architectural specifications.",
-    projectName: "Placement Command PRD",
-    projectLink: "#chapter-04",
-    keyConcepts: ["Strict Type Contracts", "Interface Modeling", "Compile-Time Safety"],
+    description: "A typed superset of JavaScript that helps structure and validate application code.",
+    details: "Enforced strict static typing, explicit domain interfaces, and typed props to ensure type safety and structured web applications.",
+    projectName: "Portfolio Application",
+    projectLink: "#chapter-00",
+    keyConcepts: ["Static Type Safety", "Interface Contracts", "Type Validation", "Application Structure"],
   },
   {
-    name: "SCSS & CSS Modules",
+    name: "Python",
+    category: "languages",
+    status: "demonstrated",
+    description: "A programming language used for scripting, backend development, and suitable AI or data-related applications.",
+    details: "Utilized for backend service development, automation scripting, and orchestrating machine learning model pipelines.",
+    projectName: "AI Smart Classroom Monitoring System",
+    projectLink: "#chapter-04",
+    keyConcepts: ["Scripting & Automation", "Backend Development", "ML Pipeline Integration", "Data Handling"],
+  },
+
+  // Frontend
+  {
+    name: "HTML",
     category: "frontend",
     status: "demonstrated",
-    description: "Responsive token systems, mixins, fluid typography",
-    details: "Built scoped component styling systems with CSS Custom Properties, mathematical spacing scales, and fluid typography tokens.",
+    description: "The markup language used to structure web content.",
+    details: "Structures modern web pages using semantic HTML5 elements for accessible, clear, and standards-compliant document hierarchy.",
+    projectName: "Web Foundations & Portfolio",
+    projectLink: "#chapter-00",
+    keyConcepts: ["Semantic Elements", "Document Structure", "Web Accessibility", "DOM Tree"],
+  },
+  {
+    name: "CSS",
+    category: "frontend",
+    status: "demonstrated",
+    description: "The stylesheet language used to control layout and visual presentation.",
+    details: "Controls layout, spacing, visual presentation, and responsive design across desktop, tablet, and mobile displays.",
+    projectName: "Web Foundations & Portfolio",
+    projectLink: "#chapter-00",
+    keyConcepts: ["Layout & Presentation", "Flexbox & Grid", "Responsive Design", "Visual Hierarchy"],
+  },
+  {
+    name: "SCSS",
+    category: "frontend",
+    status: "demonstrated",
+    description: "A CSS-compatible stylesheet syntax that adds features such as variables and nesting.",
+    details: "Extends CSS with maintainable nesting, design token variables, and reusable mixins to architect scalable styling systems.",
     projectName: "Portfolio Cosmic Design System",
     projectLink: "#chapter-00",
-    keyConcepts: ["Scoped CSS Modules", "Design Tokens & Mixins", "Responsive Fluid Layouts"],
+    keyConcepts: ["CSS-Compatible Syntax", "Variables & Mixins", "Rule Nesting", "Modular Architecture"],
   },
   {
-    name: "Three.js / WebGL",
-    category: "frontend",
-    status: "practiced",
-    description: "Particle scenes, procedural shaders, camera interactions",
-    details: "Explored GPU-accelerated canvas animations, mathematical particle distributions, and camera interactions for visual atmosphere.",
-    projectName: "Hero Cosmic Background",
-    projectLink: "#chapter-00",
-    keyConcepts: ["Particle Buffers", "Procedural Motion", "Shader Render Loop"],
-  },
-  {
-    name: "Zustand & TanStack Query",
+    name: "React",
     category: "frontend",
     status: "demonstrated",
-    description: "Client state management and server-state caching",
-    details: "Managed asynchronous server state and atomic client UI state, preventing redundant network requests and decoupling state from views.",
-    projectName: "AI Smart Classroom & RouteForge",
+    description: "A JavaScript library for building component-based user interfaces.",
+    details: "Builds modular, component-based user interfaces with declarative state management, reusable UI elements, and reactive render cycles.",
+    projectName: "Portfolio & AI Classroom",
     projectLink: "#chapter-04",
-    keyConcepts: ["Atomic State Stores", "Cache Invalidation", "Decoupled Data Fetching"],
+    keyConcepts: ["JavaScript UI Library", "Component Architecture", "State & Props", "Declarative Views"],
   },
 
   // Backend
   {
-    name: "Node.js & Express.js",
+    name: "Node.js",
     category: "backend",
     status: "demonstrated",
-    description: "REST APIs, middleware, HTTP status conventions",
-    details: "Constructed RESTful HTTP APIs with explicit status codes, route controllers, and reusable middleware chains for request processing.",
-    projectName: "Notes API Learning Project",
+    description: "A JavaScript runtime that executes JavaScript outside the browser.",
+    details: "Executes server-side JavaScript using an asynchronous, event-driven runtime to run backend servers and process HTTP traffic.",
+    projectName: "Notes API Project",
     projectLink: "#chapter-04",
-    keyConcepts: ["HTTP Route Handlers", "Middleware Lifecycles", "REST Status Standards"],
+    keyConcepts: ["JavaScript Runtime", "Event-Driven I/O", "npm Ecosystem", "Server-Side Execution"],
   },
   {
-    name: "FastAPI (Python)",
+    name: "Express.js",
     category: "backend",
     status: "demonstrated",
-    description: "Asynchronous backend endpoints, camera streaming, ML pipeline orchestration",
-    details: "Implemented asynchronous Python endpoints for handling live MJPEG camera streams and orchestrating computer vision model inference.",
-    projectName: "AI Smart Classroom Backend",
+    description: "A Node.js web framework for defining routes, middleware, and HTTP request handling.",
+    details: "Constructs backend web services and REST APIs with route handlers, middleware functions, and standardized HTTP responses.",
+    projectName: "Notes API Project",
     projectLink: "#chapter-04",
-    keyConcepts: ["Asynchronous Routing", "Pydantic Schemas", "Live MJPEG Streaming"],
-  },
-  {
-    name: "Fastify",
-    category: "backend",
-    status: "practiced",
-    description: "High-performance schema-based routing, Zod validation",
-    details: "Explored schema-first routing, high-throughput JSON serialization, and low-overhead request parsing for high-concurrency systems.",
-    projectName: "Placement Command Architecture",
-    projectLink: "#chapter-04",
-    keyConcepts: ["JSON Schema Validation", "Low-Overhead Routing", "Plugin Architecture"],
-  },
-  {
-    name: "JWT & RBAC Middleware",
-    category: "backend",
-    status: "demonstrated",
-    description: "Role-based access control, token authentication",
-    details: "Implemented authentication checks, authorization guards, and role-based permissions to protect administrative endpoints.",
-    projectName: "Backend Exploration",
-    projectLink: "#chapter-04",
-    keyConcepts: ["Bearer Token Verification", "Role Permission Guards", "Route Authorization"],
-  },
-  {
-    name: "Multer & Cloud Storage",
-    category: "backend",
-    status: "demonstrated",
-    description: "Memory buffer streaming to ImageKit & cloud CDNs",
-    details: "Engineered an in-memory buffer upload pipeline using Multer memoryStorage(), streaming binary data to ImageKit cloud CDN without disk bloat.",
-    projectName: "Notes API Cloud Storage Service",
-    projectLink: "#chapter-04",
-    keyConcepts: ["RAM Buffer Streaming", "Multipart Request Parsing", "Cloud CDN Persistence"],
+    keyConcepts: ["Node.js Web Framework", "Route Definitions", "Middleware Pipeline", "HTTP Request Handling"],
   },
 
-  // Database & Queues
+  // Databases
   {
-    name: "PostgreSQL & Prisma",
+    name: "MongoDB",
     category: "database",
     status: "demonstrated",
-    description: "Relational data modeling, exclusion constraints, migrations",
-    details: "Modeled relational data tables, foreign keys, migrations, and database-level collision prevention constraints using exclusion logic.",
-    projectName: "Placement Command PRD",
+    description: "A document-oriented NoSQL database.",
+    details: "Stores application data in flexible JSON-like BSON documents within a NoSQL document database model, providing dynamic schemas and efficient document retrieval.",
+    projectName: "Notes API Project",
     projectLink: "#chapter-04",
-    keyConcepts: ["Relational Data Integrity", "Prisma Migrations", "btree_gist Exclusion Constraints"],
-  },
-  {
-    name: "MongoDB & Mongoose",
-    category: "database",
-    status: "demonstrated",
-    description: "Document schemas, Atlas clusters, CRUD pipelines",
-    details: "Designed document schemas with typed validation, indexing, and asynchronous CRUD operations for flexible JSON document storage.",
-    projectName: "Notes API Learning Project",
-    projectLink: "#chapter-04",
-    keyConcepts: ["Document Schema Modeling", "CRUD Operations", "Connection Pooling"],
-  },
-  {
-    name: "SQLite3",
-    category: "database",
-    status: "demonstrated",
-    description: "Embedded database for real-time edge classroom analytics",
-    details: "Utilized embedded relational storage for real-time edge classroom attendance logs and local analytical query execution.",
-    projectName: "AI Smart Classroom Monitoring System",
-    projectLink: "#chapter-04",
-    keyConcepts: ["Embedded Database", "Zero-Configuration Storage", "Edge Query Performance"],
-  },
-  {
-    name: "Redis & BullMQ",
-    category: "database",
-    status: "practiced",
-    description: "Asynchronous job queues and event dispatching",
-    details: "Studied in-memory message brokers and background worker queues to decouple time-consuming tasks from the HTTP response loop.",
-    projectName: "Backend Queue Exploration",
-    projectLink: "#chapter-04",
-    keyConcepts: ["Job Queues & Workers", "Event Dispatching", "In-Memory Caching"],
-  },
-  {
-    name: "Dexie.js (IndexedDB)",
-    category: "database",
-    status: "demonstrated",
-    description: "Structured client-side offline storage queue",
-    details: "Implemented client-side browser database storage to queue offline incident reports and sync automatically when internet connectivity returns.",
-    projectName: "RouteForge Offline Queue",
-    projectLink: "#chapter-04",
-    keyConcepts: ["Client IndexedDB", "Offline-First Sync", "Schema Versioning"],
-  },
-
-  // AI & Systems
-  {
-    name: "YOLOv8 & PyTorch",
-    category: "ai-system",
-    status: "demonstrated",
-    description: "Object detection, student behavior classification, model inference",
-    details: "Configured dual computer vision models for object detection and fine-tuned student behavioral classification across 7 real-time behaviors.",
-    projectName: "AI Smart Classroom Monitoring System",
-    projectLink: "#chapter-04",
-    keyConcepts: ["Model Inference Pipeline", "Multi-Class Behavior Detection", "Bounding Box Extraction"],
-  },
-  {
-    name: "Leaflet GIS & ORS",
-    category: "ai-system",
-    status: "demonstrated",
-    description: "Geospatial mapping, hazard layer rendering, route calculation",
-    details: "Integrated interactive geospatial mapping, polyline route calculation, and environmental hazard layer overlays using OpenRouteService.",
-    projectName: "RouteForge GIS Mapping",
-    projectLink: "#chapter-04",
-    keyConcepts: ["Geospatial Coordinates", "Polyline Rendering", "Interactive Map Layers"],
-  },
-  {
-    name: "OpenCV",
-    category: "ai-system",
-    status: "demonstrated",
-    description: "Real-time frame extraction, MJPEG streaming, annotation overlays",
-    details: "Handled camera video capture, extracted video frames, rendered visual bounding boxes, and converted frames into HTTP streaming formats.",
-    projectName: "AI Smart Classroom Video Pipeline",
-    projectLink: "#chapter-04",
-    keyConcepts: ["Frame Extraction", "Bounding Box Annotations", "MJPEG Video Encoding"],
-  },
-  {
-    name: "Docker Compose",
-    category: "tool",
-    status: "practiced",
-    description: "Multi-container application orchestration",
-    details: "Defined multi-service container configurations to run frontend, backend, and database dependencies in isolated environments.",
-    projectName: "Multi-Container Services",
-    projectLink: "https://github.com/MALLIKARUNA",
-    keyConcepts: ["Multi-Container Definition", "Network Isolation", "Local Reproducibility"],
-  },
-  {
-    name: "Git & GitHub",
-    category: "tool",
-    status: "demonstrated",
-    description: "Version control, collaborative workflows, issue tracking",
-    details: "Maintained clean version control, semantic commit hygiene, feature branching, and documented repositories for open-source review.",
-    projectName: "Personal GitHub Repositories",
-    projectLink: "https://github.com/MALLIKARUNA",
-    keyConcepts: ["Version Control", "Semantic Commit Hygiene", "Issue & Branch Tracking"],
+    keyConcepts: ["NoSQL Database Concept", "Document-Oriented Storage", "Collections & BSON", "Flexible Schemas"],
   },
 ];
 
@@ -589,45 +393,6 @@ export const JOURNEY_MILESTONES: JourneyMilestone[] = [
   },
 ];
 
-export const PRODUCT_THINKING_PILLARS: ProductThinkingStep[] = [
-  {
-    number: "01",
-    title: "Understanding the Real Human Problem",
-    concept:
-      "A product should never exist merely because a technology is trendy. It exists because someone experiences friction, delay, or confusion.",
-    practicalApplication:
-      "When designing emergency or relief logistics interfaces, operators do not just need raw maps; they need situational awareness under unpredictable conditions and offline resilience when network connectivity drops.",
-    evidenceReference: "Logistics & Offline Sync Architecture",
-  },
-  {
-    number: "02",
-    title: "Structuring User Journeys Before Writing Code",
-    concept:
-      "Designing interface flows and information hierarchy creates clarity that saves hundreds of hours of rewriting code later.",
-    practicalApplication:
-      "In Placement Command, we mapped the differing needs of the Placement Coordinator, Interview Panelist, and Student Applicant before designing a single database schema or writing a route.",
-    evidenceReference: "Placement Command Backend PRD v1.2",
-  },
-  {
-    number: "03",
-    title: "Deterministic Guarantees Over Black Boxes",
-    concept:
-      "When business correctness or user safety is at stake, critical rules must be enforced deterministically by the database and core algorithms, not left to chance.",
-    practicalApplication:
-      "Enforced interview room and panel conflict-prevention via PostgreSQL `btree_gist` exclusion constraints over half-open timestamp ranges, guaranteeing that double-booking is mathematically impossible.",
-    evidenceReference: "Placement Command Scheduling Engine",
-  },
-  {
-    number: "04",
-    title: "Operator Empathy & Alert Fatigue Protection",
-    concept:
-      "A system that constantly shouts is just as useless as a system that says nothing. Cognitive load must be actively managed.",
-    practicalApplication:
-      "In the AI Smart Classroom Monitoring System, we implemented a 10-minute (600-second) cooldown on notification popups per classroom, consolidating continuous behavior into ongoing incidents so supervisors aren't overwhelmed.",
-    evidenceReference: "AI Smart Classroom System Architecture",
-  },
-];
-
 export const FAQ_KNOWLEDGE_BASE = [
   {
     question: "Who is Mallikarjun Alyal?",
@@ -662,6 +427,6 @@ export const FAQ_KNOWLEDGE_BASE = [
   {
     question: "Where can I find his source code and profiles?",
     answer:
-      "You can explore his code on GitHub (https://github.com/MALLIKARUNA), connect with him on LinkedIn (https://www.linkedin.com/in/mallikarjun-alyal-5380b0349/), or reach out via email at mallikarjunalyal03@gmail.com.",
+      "You can explore his code on GitHub (https://github.com/MALLIKARUNA), connect with him on LinkedIn (https://www.linkedin.com/in/mallikarjun-alyal-5380b0349/), or reach out via email at mallikarjunalyal262@gmail.com.",
   },
 ];

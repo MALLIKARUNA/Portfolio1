@@ -6,7 +6,7 @@ export type TechStatus = "demonstrated" | "practiced" | "exploring";
 
 export interface TechItem {
   name: string;
-  category: "frontend" | "backend" | "database" | "ai-system" | "tool";
+  category: "languages" | "frontend" | "backend" | "database";
   status: TechStatus;
   description: string;
   details?: string;
@@ -20,28 +20,28 @@ export interface ProjectDecision {
   rationale: string;
 }
 
+export type ProjectCategory =
+  | "AI & Systems"
+  | "Full Stack"
+  | "Frontend"
+  | "Web Applications"
+  | "Personal Websites";
+
 export interface ProjectCaseStudy {
   id: string;
   slug: string;
   title: string;
   tagline: string;
-  category: "AI & Computer Vision" | "Hackathon Winner" | "Product Architecture" | "Frontend & Interface" | "Systems & API";
-  role: string;
-  timeline: string;
-  featured: boolean;
+  category: ProjectCategory;
+  status: string;
+  role?: string;
+  timeline?: string;
+  featured?: boolean;
   image: string;
-  previewImages?: string[];
-  problem: string;
-  context: string;
-  myContribution: string;
+  description: string;
   techStack: string[];
-  keyDecisions: ProjectDecision[];
-  challenges: string;
-  outcome: string;
-  whatILearned: string;
-  githubUrl?: string;
+  githubUrl: string;
   liveUrl?: string;
-  documentationUrl?: string;
   stats?: { label: string; value: string }[];
 }
 
@@ -57,13 +57,6 @@ export interface JourneyMilestone {
   isFirstPlace?: boolean;
 }
 
-export interface ProductThinkingStep {
-  number: string;
-  title: string;
-  concept: string;
-  practicalApplication: string;
-  evidenceReference: string;
-}
 
 export interface ChatMessage {
   id: string;

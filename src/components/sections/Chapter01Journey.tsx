@@ -10,10 +10,6 @@ export function Chapter01Journey() {
   return (
     <section id="chapter-01" className={styles.journeySection}>
       <div className="container">
-        {/* Section Identifier */}
-        <div className="section-label">
-          <span>Chapter 01 · The Beginning</span>
-        </div>
 
         <h2 className="section-title">From Curiosity to Creation</h2>
         <p className={`section-lead ${styles.constrainedLead}`}>

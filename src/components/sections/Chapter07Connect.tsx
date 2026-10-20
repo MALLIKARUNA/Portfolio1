@@ -3,9 +3,10 @@
 import React, { useState } from "react";
 import styles from "./Chapter07Connect.module.scss";
 import { PERSONAL_INFO } from "@/data/portfolioData";
-import { motion } from "motion/react";
-import { Mail, Send, CheckCircle2, MessageSquare } from "lucide-react";
+import { Mail, Send, CheckCircle2, Loader2, AlertCircle, RotateCcw } from "lucide-react";
 import { GithubIcon, LinkedinIcon, InstagramIcon } from "@/components/icons/BrandIcons";
+
+type FormStatus = "idle" | "loading" | "success" | "error";
 
 export function Chapter07Connect() {
   const [formData, setFormData] = useState({
@@ -13,21 +14,67 @@ export function Chapter07Connect() {
     email: "",
     topic: "Idea Exchange",
     message: "",
+    honeypot: "",
   });
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [status, setStatus] = useState<FormStatus>("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.message) return;
+    if (status === "loading") return;
 
-    // Compose mailto as accessible direct fallback
-    const subject = encodeURIComponent(`[Portfolio Connect] ${formData.topic} from ${formData.name}`);
-    const body = encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\nTopic: ${formData.topic}\n\nMessage:\n${formData.message}`
-    );
-    window.location.href = `mailto:${PERSONAL_INFO.email}?subject=${subject}&body=${body}`;
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+      setStatus("error");
+      setErrorMessage("Please complete all required fields.");
+      return;
+    }
 
-    setIsSubmitted(true);
+    setStatus("loading");
+    setErrorMessage("");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          topic: formData.topic,
+          message: formData.message,
+          honeypot: formData.honeypot,
+        }),
+      });
+
+      const result = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(
+          result?.error ||
+            "Unable to deliver message at this time. Please try again or reach out directly via email."
+        );
+      }
+
+      setStatus("success");
+    } catch (err: unknown) {
+      const message =
+        err instanceof Error
+          ? err.message
+          : "An unexpected error occurred. Please try again or reach out directly.";
+      setStatus("error");
+      setErrorMessage(message);
+    }
+  };
+
+  const handleReset = () => {
+    setFormData({
+      name: "",
+      email: "",
+      topic: "Idea Exchange",
+      message: "",
+      honeypot: "",
+    });
+    setStatus("idle");
+    setErrorMessage("");
   };
 
   return (
@@ -35,11 +82,6 @@ export function Chapter07Connect() {
       <div className={styles.horizonGlow} />
 
       <div className="container">
-        {/* Section Header */}
-        <div className="section-label">
-          <span>Chapter 07 · The Open Loop</span>
-        </div>
-
         <div className={styles.connectGrid}>
           {/* Left Column: Invitation & Channels */}
           <div className={styles.leftCol}>
@@ -115,19 +157,37 @@ export function Chapter07Connect() {
               Send a note directly to my inbox. I usually reply within 24–48 hours.
             </p>
 
-            {isSubmitted ? (
+            {status === "success" ? (
               <div className={styles.successMessage}>
-                <CheckCircle2 size={32} style={{ margin: "0 auto 0.75rem", display: "block" }} />
-                <strong>Opening your email client...</strong>
-                <p style={{ marginTop: "0.5rem", color: "var(--text-secondary)" }}>
-                  If your mail client didn&apos;t open automatically, feel free to write directly to{" "}
-                  <a href={`mailto:${PERSONAL_INFO.email}`} style={{ color: "var(--ice-blue)", textDecoration: "underline" }}>
-                    {PERSONAL_INFO.email}
-                  </a>.
+                <CheckCircle2
+                  size={36}
+                  style={{ margin: "0 auto 0.75rem", display: "block" }}
+                />
+                <div className={styles.successTitle}>Message Dispatched to Inbox</div>
+                <p style={{ margin: "0.5rem 0 0 0", color: "var(--text-secondary)" }}>
+                  Thank you, <strong>{formData.name || "friend"}</strong>. Your note was
+                  successfully accepted by the delivery service and forwarded to
+                  Mallikarjun&apos;s personal inbox.
                 </p>
+                <button type="button" onClick={handleReset} className={styles.resetBtn}>
+                  <RotateCcw size={14} />
+                  <span>Send Another Message</span>
+                </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit} noValidate>
+                {/* Honeypot field for anti-spam bots */}
+                <input
+                  type="text"
+                  name="company"
+                  value={formData.honeypot}
+                  onChange={(e) => setFormData({ ...formData, honeypot: e.target.value })}
+                  className={styles.honeypotField}
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                />
+
                 <div className={styles.formGroup}>
                   <label htmlFor="name" className={styles.formLabel}>
                     Your Name
@@ -136,10 +196,12 @@ export function Chapter07Connect() {
                     id="name"
                     type="text"
                     required
+                    maxLength={100}
                     placeholder="Ada Lovelace"
                     className={styles.formInput}
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    disabled={status === "loading"}
                   />
                 </div>
 
@@ -151,10 +213,12 @@ export function Chapter07Connect() {
                     id="email"
                     type="email"
                     required
+                    maxLength={254}
                     placeholder="ada@example.com"
                     className={styles.formInput}
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    disabled={status === "loading"}
                   />
                 </div>
 
@@ -167,6 +231,7 @@ export function Chapter07Connect() {
                     className={styles.formSelect}
                     value={formData.topic}
                     onChange={(e) => setFormData({ ...formData, topic: e.target.value })}
+                    disabled={status === "loading"}
                   >
                     <option value="Idea Exchange">Idea Exchange & Collaboration</option>
                     <option value="FUTURE U Discussion">FUTURE U / AI Hackathon</option>
@@ -184,16 +249,52 @@ export function Chapter07Connect() {
                     id="message"
                     required
                     rows={4}
+                    maxLength={3000}
                     placeholder="What are you building or exploring?"
                     className={styles.formTextarea}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    disabled={status === "loading"}
                   />
+                  <span className={styles.charCount}>
+                    {formData.message.length} / 3000
+                  </span>
                 </div>
 
-                <button type="submit" className={styles.submitBtn}>
-                  <Send size={15} />
-                  <span>Send Message</span>
+                {status === "error" && (
+                  <div className={styles.errorMessage} role="alert">
+                    <AlertCircle size={18} className={styles.errorIcon} />
+                    <div className={styles.errorText}>
+                      <span>{errorMessage}</span>
+                      <div>
+                        Or reach out directly at
+                        <a
+                          href={`mailto:${PERSONAL_INFO.email}`}
+                          className={styles.errorFallbackLink}
+                        >
+                          {PERSONAL_INFO.email}
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                <button
+                  type="submit"
+                  className={styles.submitBtn}
+                  disabled={status === "loading"}
+                >
+                  {status === "loading" ? (
+                    <>
+                      <Loader2 size={15} className={styles.spinner} />
+                      <span>Sending Message...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Send size={15} />
+                      <span>Send Message</span>
+                    </>
+                  )}
                 </button>
               </form>
             )}
