@@ -7,7 +7,6 @@ import { PERSONAL_INFO } from "@/data/portfolioData";
 import { useSmoothScroll } from "@/components/providers/SmoothScrollProvider";
 import { ArrowRight, Compass, ArrowDown } from "lucide-react";
 import { GithubIcon, LinkedinIcon, InstagramIcon } from "@/components/icons/BrandIcons";
-import { HeroPortalVisual } from "./HeroPortalVisual"; // TEMP HIDDEN — restore by uncommenting below
 import { HeroCosmicBackground } from "./HeroCosmicBackground";
 import { motion } from "motion/react";
 

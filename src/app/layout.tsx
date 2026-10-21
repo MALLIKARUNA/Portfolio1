@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Space_Grotesk, Inter, IBM_Plex_Mono, Instrument_Serif } from "next/font/google";
 import "@/styles/globals.scss";
-import { PERSONAL_INFO } from "@/data/portfolioData";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
 
 const spaceGrotesk = Space_Grotesk({

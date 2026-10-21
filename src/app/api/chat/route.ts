@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { FAQ_KNOWLEDGE_BASE, PERSONAL_INFO, PROJECTS, TECHNICAL_SKILLS } from "@/data/portfolioData";
+import { FAQ_KNOWLEDGE_BASE, PERSONAL_INFO } from "@/data/portfolioData";
 
 export async function POST(req: Request) {
   try {
@@ -77,7 +77,7 @@ export async function POST(req: Request) {
         "What is his backend and database experience?",
       ],
     });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Failed to process chat query" },
       { status: 500 }

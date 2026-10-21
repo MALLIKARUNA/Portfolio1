@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import styles from "./AskAssistant.module.scss";
-import { Sparkles, X, Send, ShieldCheck } from "lucide-react";
+import { Sparkles, X, Send } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { FAQ_KNOWLEDGE_BASE } from "@/data/portfolioData";
 
@@ -15,6 +15,12 @@ interface Message {
   id: string;
   sender: "user" | "assistant";
   text: string;
+}
+
+let messageSequence = 0;
+function createMessageId(prefix: string): string {
+  messageSequence += 1;
+  return `${prefix}_${messageSequence}`;
 }
 
 export function AskAssistant({ isOpen, onClose }: AskAssistantProps) {
@@ -40,12 +46,12 @@ export function AskAssistant({ isOpen, onClose }: AskAssistantProps) {
     "What is his backend and database stack?",
   ];
 
-  const handleSendMessage = async (textToSend: string) => {
+  const handleSendMessage = useCallback(async (textToSend: string) => {
     const trimmed = textToSend.trim();
-    if (!trimmed || loading) return;
+    if (!trimmed) return;
 
     const userMsg: Message = {
-      id: `u_${Date.now()}`,
+      id: createMessageId("u"),
       sender: "user",
       text: trimmed,
     };
@@ -67,13 +73,13 @@ export function AskAssistant({ isOpen, onClose }: AskAssistantProps) {
 
       const data = await response.json();
       const assistantMsg: Message = {
-        id: `a_${Date.now()}`,
+        id: createMessageId("a"),
         sender: "assistant",
         text: data.reply || "I couldn't retrieve that information.",
       };
 
       setMessages((prev) => [...prev, assistantMsg]);
-    } catch (err) {
+    } catch {
       // Local knowledge fallback
       const match = FAQ_KNOWLEDGE_BASE.find((k) =>
         trimmed.toLowerCase().includes(k.question.toLowerCase().slice(0, 15))
@@ -84,7 +90,7 @@ export function AskAssistant({ isOpen, onClose }: AskAssistantProps) {
         : "Mallikarjun is an engineering student at BITM Ballari, 1× Hackathon Winner (1st Place at FUTURE U AI Challenge), and full-stack developer specializing in Next.js, Node.js, FastAPI, and PostgreSQL.";
 
       const assistantMsg: Message = {
-        id: `a_${Date.now()}`,
+        id: createMessageId("a"),
         sender: "assistant",
         text: fallbackText,
       };
@@ -92,7 +98,7 @@ export function AskAssistant({ isOpen, onClose }: AskAssistantProps) {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   if (!isOpen) return null;
 

@@ -24,17 +24,19 @@ export function HeroPortalVisual() {
   const animFrameIdRef = useRef<number | null>(null);
   const isVisibleRef = useRef<boolean>(true);
   const [isPaused, setIsPaused] = useState<boolean>(false);
-  const [reducedMotion, setReducedMotion] = useState<boolean>(false);
+  const [reducedMotion, setReducedMotion] = useState<boolean>(() => {
+    if (typeof window !== "undefined") {
+      return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    }
+    return false;
+  });
 
   // Mouse tilt target and current values
   const tiltTarget = useRef({ x: 0, y: 0 });
   const tiltCurrent = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
-    // Check prefers-reduced-motion
     const mql = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReducedMotion(mql.matches);
-
     const handleMqlChange = (e: MediaQueryListEvent) => {
       setReducedMotion(e.matches);
     };

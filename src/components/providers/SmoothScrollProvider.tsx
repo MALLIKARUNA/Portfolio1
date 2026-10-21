@@ -1,17 +1,15 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useRef } from "react";
+import React, { createContext, useContext, useEffect, useRef, useCallback, useMemo } from "react";
 import Lenis from "lenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 interface SmoothScrollContextType {
-  lenis: Lenis | null;
   scrollTo: (target: string | HTMLElement, options?: { offset?: number; duration?: number }) => void;
 }
 
 const SmoothScrollContext = createContext<SmoothScrollContextType>({
-  lenis: null,
   scrollTo: () => {},
 });
 
@@ -63,7 +61,7 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
     };
   }, []);
 
-  const scrollTo = (target: string | HTMLElement, options?: { offset?: number; duration?: number }) => {
+  const scrollTo = useCallback((target: string | HTMLElement, options?: { offset?: number; duration?: number }) => {
     if (lenisRef.current) {
       lenisRef.current.scrollTo(target, {
         offset: options?.offset ?? 0,
@@ -78,10 +76,12 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
         target.scrollIntoView({ behavior: "smooth" });
       }
     }
-  };
+  }, []);
+
+  const contextValue = useMemo(() => ({ scrollTo }), [scrollTo]);
 
   return (
-    <SmoothScrollContext.Provider value={{ lenis: lenisRef.current, scrollTo }}>
+    <SmoothScrollContext.Provider value={contextValue}>
       {children}
     </SmoothScrollContext.Provider>
   );
