@@ -93,9 +93,39 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${spaceGrotesk.variable} ${inter.variable} ${ibmPlexMono.variable} ${instrumentSerif.variable}`}
     >
-      <body className="antialiased">
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                if (typeof window === 'undefined') return;
+                function isExtensionError(err, filename) {
+                  return (
+                    (filename && filename.indexOf('chrome-extension://') !== -1) ||
+                    (err && err.stack && err.stack.indexOf('chrome-extension://') !== -1)
+                  );
+                }
+                window.addEventListener('error', function(event) {
+                  if (isExtensionError(event.error, event.filename)) {
+                    event.stopImmediatePropagation();
+                    event.preventDefault();
+                  }
+                }, true);
+                window.addEventListener('unhandledrejection', function(event) {
+                  if (event.reason && isExtensionError(event.reason, '')) {
+                    event.stopImmediatePropagation();
+                    event.preventDefault();
+                  }
+                }, true);
+              })();
+            `,
+          }}
+        />
+      </head>
+      <body className="antialiased" suppressHydrationWarning>
         <SmoothScrollProvider>{children}</SmoothScrollProvider>
       </body>
     </html>
